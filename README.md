@@ -1,3 +1,5 @@
+# Building a Near Real Time Data Warehouse for METRO Store using MESHJOIN in Java
+
 # Overview
 This project demonstrates the development of a near-real-time Data Warehouse (DW) prototype for the METRO shopping store in Pakistan, showcasing how transactional data can be processed, enriched, and analyzed using a Java-based implementation of the extended MESHJOIN algorithm.
 
@@ -98,6 +100,18 @@ Create the `metro_dw` star schema and tables using the `create-DW.sql` script
 Open MySQL Workbench and connect to the database.
 
 Execute the provided OLAP queries to analyze the data. These include insights into revenue trends, product sales, seasonal analysis, and store performance.
+## Challenges with MESH Join
+- **Dependency Between Queue Partitions and Iterations Hampers Optimal Memory Distribution**
+
+  MESHJOIN relies on the number of iterations needed to bring the disk-based relation into memory and the size of the partitions in the internal queue for the      stream data. The best memory allocation among the join components is hindered by this dependency. In particular, there is poor performance since the disk buffer's size alters needlessly with the disk-based relation's size.
+
+- **Lack of a Degree of Freedom Limits Tuning Flexibility**
+
+  Due to the lack of an extra modifiable parameter, MESHJOIN's tuning procedure lacks freedom. This limits its capacity to allocate memory between the join components especially between the hash table and the disk-buffer in an optimal manner. Reaching optimal performance is challenging because of complex dependencies that limit the adjustment.
+
+- **Poor and Unreliable Results for Disk-Based Relationships of Varying Sizes**
+
+  The performance of MESHJOIN is inconsistent and unsatisfactory as the disk-based relation's size varies. Changes in the relation's size affect the ideal disk-buffer size in MESHJOIN, resulting in inefficiencies and poor efficiency. This fluctuation contradicts logic and implies that the distribution of memory is not ideal. 
 
 ## Notes
 Ensure the database connection details are accurate when running the Java programs.
