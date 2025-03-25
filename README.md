@@ -10,7 +10,6 @@ The following datasets are used in this project:
 - `transactions.csv`: Contains customer purchase records.
 - `customers.csv`: Master data with customer details.
 - `products.csv`: Master data with product details.
-- `output.csv`: Generated file containing enriched transactional data ready to be loaded into the data warehouse.
 
 # Prerequisites
 
